@@ -20,3 +20,6 @@ b==0:
 c==0:
 ![image](https://github.com/AndreyS19/LAB-3/assets/125403674/4bd2dac0-81e0-41d0-94f6-3eb1f65cf360)
 
+
+tests:
+![image](https://github.com/AndreyS19/LAB-3/assets/125403674/e6e72b9b-9ba7-4800-b64e-fac97bdf2162)
