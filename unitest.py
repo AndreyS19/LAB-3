@@ -7,21 +7,22 @@ class Test(unittest.TestCase):
         app.config['TESTING'] = True# устанавливает флаг TESTING в значение True, чтобы приложение работало в режиме тестирования.
         self.app = app.test_client() # чтобы отправлять запросы к приложению.
 
-
+    #получение url-адреса стартовой страницы
     def test_home(self):
+        #Браузер говорит серверу, чтобы он просто получил информацию, хранимую на этой странице, и отослал её
         result = self.app.get('/')# проверяет, что код состояния равен 200 (успешный запрос).
         self.assertEqual(result.status_code, 200)
 
-
+    #ввод данных по url-адресу /solve
     def test_solve(self):
-        response = self.app.post('/solve')
+        #Браузер говорит серверу, что он хочет сообщить этому URL некоторую новую информацию, и что сервер должен убедиться, что данные сохранены и сохранены в единожды. Обычно, аналогичным образом происходит передача из HTML форм на сервер данных.
+        response = self.app.post('/solve',data=dict(a=2.5, b=1, c=1))
         self.assertEqual(response.status_code, 200)# проверяет, что код состояния равен 200 (успешный запрос).
-
 
     # дискриминант меньше нуля
     def test_discriminant_less_than_zero(self):
         result = self.app.post('/solve', data=dict(a=2.5, b=1, c=1))
-        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.status_code, 0)
         self.assertIn(b'x1=(-0,2+0,6j)', result.data)# проверяет, что в содержимом ответа присутствует строка x1=(-0,2+0,6j)
         self.assertIn(b'x2=(-0,2-0,6j)', result.data)# проверяет, что в содержимом ответа присутствует строка x1=(-0,2-0,6j)
 
@@ -38,7 +39,7 @@ class Test(unittest.TestCase):
         self.assertIn(b'x1=3,0', result.data)
         self.assertIn(b'x2=2,0', result.data)
 
-    # нечитаемые переменные
+    # нечитаемые параметры
     def test_unreadeble_variables(self):
         result = self.app.post('/solve', data=dict(a='f', b=-5, c=6))
         self.assertEqual(result.status_code, 200)
