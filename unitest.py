@@ -10,8 +10,8 @@ class Test(unittest.TestCase):
     #получение url-адреса стартовой страницы
     def test_home(self):
         #Браузер говорит серверу, чтобы он просто получил информацию, хранимую на этой странице, и отослал её
-        result = self.app.get('/')# проверяет, что код состояния равен 200 (успешный запрос).
-        self.assertEqual(result.status_code, 200)
+        result = self.app.get('/')
+        self.assertEqual(result.status_code, 200)# проверяет, что код состояния равен 200 (успешный запрос).
 
     #ввод данных по url-адресу /solve
     def test_solve(self):
